@@ -43,12 +43,8 @@ Jack rarely runs git himself; Claude does it. The setup has quirks:
   once per session before the first commit.
 - **The device shell cannot push**: the remote is SSH, and that shell has neither network SSH nor
   access to `~/.ssh`. Don't retry.
-- To push: `git bundle create evo.bundle main` on the device → stage the bundle into the cloud
-  workspace → in a cloud clone of `JackMead/evo-game-claude` (via the GitHub connector), fetch the
-  bundle and `git reset --hard FETCH_HEAD` → `git push origin main`. Then on the device delete the
-  bundle and run `git update-ref refs/remotes/origin/main main` so local status shows in sync.
-  Hashes are identical on both sides, so histories never diverge.
-- Do these steps in order, never in parallel: update the local tracking ref only after the push
-  has succeeded.
+- To push, use the **`ship` skill** (`.claude/skills/ship/SKILL.md`). It bundles the local commit,
+  pushes it from a cloud clone via the GitHub connector, and syncs the local tracking ref.
+  Commit hashes are identical on both sides, so histories never diverge.
 - If Jack ever edits on GitHub directly, pull those changes into the local copy before committing
   (the reverse route: bundle from the cloud clone → write into the folder → fetch from it).
