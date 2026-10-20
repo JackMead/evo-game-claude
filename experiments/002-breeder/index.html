@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>002 Breeder</title>
+<style>
+  :root { --bg:#0e1512; --panel:#151f1b; --line:#24332d; --text:#e6efe9; --dim:#8fa49a; --accent:#f2c14e; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, sans-serif; }
+  #app { display: flex; height: 100vh; }
+  #penWrap { flex: 1; min-width: 0; position: relative; }
+  #pen { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: pointer; }
+  #panel { width: 330px; background: var(--panel); border-left: 1px solid var(--line); padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+  #seasonLabel { font-size: 13px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  .card { background: #1b2823; border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+  .card .label { font-size: 12px; color: var(--dim); }
+  .card .env { font-size: 20px; font-weight: 700; }
+  .card .desc { color: var(--dim); }
+  .card h3 { margin: 0 0 6px; }
+  .card ul { margin: 6px 0; padding-left: 18px; }
+  #hint { color: var(--dim); }
+  .buttons { display: flex; gap: 8px; }
+  button { flex: 1; font: inherit; font-weight: 600; padding: 10px 12px; border-radius: 8px; border: 0; background: var(--accent); color: #1b1606; cursor: pointer; }
+  button:disabled { opacity: .45; cursor: default; }
+  button.secondary { background: #2a3a33; color: var(--text); }
+  #pop { color: var(--dim); }
+  h4 { margin: 4px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); }
+  #log { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+  #log .sys { color: var(--dim); }
+  #log .sys b { color: var(--text); }
+  #log .death { color: #ff9b9b; }
+  #log .mad { color: #ff6b5b; font-weight: 600; }
+  #log .birth { color: #9be3a6; }
+  #log i { color: var(--dim); font-style: normal; font-size: 12px; }
+  footer { margin-top: auto; color: #5d6f67; font-size: 12px; }
+  @media (max-width: 760px) {
+    #app { flex-direction: column; height: auto; }
+    #penWrap { height: 60vh; flex: none; }
+    #panel { width: auto; border-left: 0; border-top: 1px solid var(--line); }
+  }
+</style>
+</head><body>
+<main id="app">
+  <div id="penWrap"><canvas id="pen"></canvas></div>
+  <aside id="panel">
+    <div id="seasonLabel"></div>
+    <div id="forecast" class="card"></div>
+    <div id="hint"></div>
+    <div class="buttons"><button id="go"></button><button id="alt" class="secondary" hidden></button></div>
+    <div id="pop"></div>
+    <h4>Chronicle</h4>
+    <div id="log"></div>
+    <footer id="seedLabel"></footer>
+  </aside>
+</main>
+<script src="game.js"></script>
+</body></html>
